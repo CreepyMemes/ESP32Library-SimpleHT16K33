@@ -27,7 +27,7 @@ class HT16K33{
 		void 	 loop();
 
 		void 	 drawPixel(int16_t x, int16_t y, uint16_t state);		
-		void 	 drawBitmap(const uint16_t  bitmap[]);
+		void 	 drawImage(const uint16_t  bitmap[]);
 		void 	 clear();
 
 		void 	 setDisplayState(bool state);
@@ -44,15 +44,16 @@ class HT16K33{
 		
 		void 	 writeData(const uint8_t *data, size_t quantity);
 
-		uint8_t  _address;		 // The I2C device's address
-		uint16_t _databuffer[8]; // Raw display buffer data
-		TwoWire* _wire; 		 // Pointer to the I2C bus interface
-
+		const uint16_t  (*_animation)[8]; // The main 2D array pointer that points to the selected animation
+		
 		uint8_t  _frames;		 // The amount of frames the animation has
 		uint8_t  _currentFrame;  // The current frame index
 		uint16_t _frameInterval; // The frame interval between each frame, (calculated from FPS)
 		uint32_t _lastTime;	     // The last time the function millis() has ben called here (used to iterate through animation frames)
 		bool	 _running;	     // Variable that tells if the display is currently going through an animation
+		
+		uint16_t _databuffer[8]; // Raw display buffer data
+		uint8_t  _address;		 // The I2C device's address
+		TwoWire* _wire; 		 // Pointer to the I2C bus interface
 
-		const uint16_t  (*_animation)[8]; // The main 2D array pointer that points to the selected animation
 }; 

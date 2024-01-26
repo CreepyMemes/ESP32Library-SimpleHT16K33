@@ -56,7 +56,7 @@ void HT16K33::loop(){
 	if (currentTime - _lastTime >= _frameInterval){
 		_lastTime = currentTime;
 
-		drawBitmap(_animation[_currentFrame]);
+		drawImage(_animation[_currentFrame]);
 
 		_currentFrame++;
 	}
@@ -86,7 +86,7 @@ void HT16K33::drawPixel(int16_t x, int16_t y, uint16_t state){
 *	@brief Method that draws a 8x16 bits image, each bit either being on or off (0 or 1)
 *	@param bitmap  8 element array with each row being 16 bits
 */
-void HT16K33::drawBitmap(const uint16_t bitmap[]){
+void HT16K33::drawImage(const uint16_t bitmap[]){
 	for (int16_t i = 0; i < 8; i++){
 		for (int16_t j = 0; j < 16; j++){
 			 drawPixel(i, j, bitRead(bitmap[i], 15-j));
